@@ -322,17 +322,18 @@ func (h *Handler) create(config *v13.EKSClusterConfig, sess *session.Session, ek
 		}
 
 		// set created security groups to config
-		config.Spec.SecurityGroups = strings.Split(securityGroupsString, ",")
-		securityGroups = aws.StringSlice(config.Spec.SecurityGroups)
+		// config.Spec.SecurityGroups = strings.Split(securityGroupsString, ",")
+		securityGroups = aws.StringSlice(strings.Split(securityGroupsString, ","))
 
 		// set created subnets to config
-		config.Spec.Subnets = strings.Split(subnetIdsString, ",")
-		subnetIds = aws.StringSlice(config.Spec.Subnets)
+		// config.Spec.Subnets = strings.Split(subnetIdsString, ",")
+		subnetIds = aws.StringSlice(strings.Split(subnetIdsString, ","))
 
+		/*
 		config, err := h.eksCC.Update(config)
 		if err != nil {
 			return config, err
-		}
+		}*/
 	} else {
 		logrus.Infof("VPC info provided, skipping create")
 
