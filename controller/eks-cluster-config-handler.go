@@ -1129,6 +1129,8 @@ func (h *Handler) importCluster(config *v13.EKSClusterConfig, eksService *eks.EK
 		}
 	}
 
+	config.Status.Subnets = aws.StringValueSlice(clusterState.Cluster.ResourcesVpcConfig.SubnetIds)
+	config.Status.SecurityGroups = aws.StringValueSlice(clusterState.Cluster.ResourcesVpcConfig.SecurityGroupIds)
 	config.Status.Phase = eksConfigActivePhase
 	return h.eksCC.UpdateStatus(config)
 }
